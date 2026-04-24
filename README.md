@@ -28,11 +28,12 @@ sudo ip link set wlan0 up
 
 iw dev
 
-# режим монитора
-
-    sudo airmon-ng check kill
+# Starting monitor mode
+    sudo airmon-ng
+    sudo airmon-ng check kill (если мешает)
     sudo airmon-ng start wlan1
-
+    sudo airmon-ng stop wlan0mon
+    
 # скан всех сетй 
 
     sudo airodump-ng wlan1 
