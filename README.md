@@ -5,17 +5,18 @@ iw list
 ищем 'software interface modes'
 
 # Сканирование доступных сетей
-iwlist wlan0 scan |  grep 'Cell\|Quality\|ESSID\|IEEE'
+    iwlist wlan0 scan |  grep 'Cell\|Quality\|ESSID\|IEEE'
 
 # Для подключения к сети
-sudo iwconfig wlan0 essid HTB-Wifi
+    sudo iwconfig wlan0 essid HTB-Wifi
 
 # смена мощности интерфейса
-sudo iw reg set US
-sudo ifconfig wlan1 down
-sudo iwconfig wlan1 txpower 30
-sudo ifconfig wlan1 up
-iwconfig
+    sudo iw reg set US
+    sudo ifconfig wlan1 down
+    sudo iwconfig wlan1 txpower 30
+    sudo ifconfig wlan1 up
+    iwconfig
+    
 Ту же информацию о чипсете и драйвере можем посмотреть с помощью утилиты airmon-ng.
 
 sudo systemctl stop NetworkManager
