@@ -32,15 +32,15 @@ iw dev
     sudo airmon-ng
     sudo airmon-ng check kill (если мешает)
     sudo airmon-ng start wlan1
-    sudo airmon-ng stop wlan0mon
+    sudo airmon-ng stop wlan1mon
     
 # скан всех сетй 
 
-    sudo airodump-ng wlan1 
+    sudo airodump-ng wlan1mon [--band abg]
 
 # прослушивание конкретной сети
 
-    sudo airodump-ng --bssid C4:6E:1F:71:EC:16 --channel 1 -w test wlan1
+    sudo airodump-ng --bssid C4:6E:1F:71:EC:16 --channel 1 -w test wlan1mon
 
 # деауз
 
